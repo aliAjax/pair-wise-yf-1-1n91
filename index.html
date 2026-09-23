@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>泵站值守台账</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>泵站值守台账</h1>
+    <div class="topbar-meta">
+      <span id="shiftLabel" class="shift-badge">第 1 班</span>
+      <span id="clock"></span>
+    </div>
+  </header>
+
+  <div id="alerts" class="alerts"></div>
+
+  <main class="layout">
+    <section class="panel" id="waterPanel">
+      <h2>水位登记</h2>
+      <div class="water-now"><span id="waterNow">--</span><small> m</small></div>
+      <div id="waterStatus" class="water-status">尚未登记</div>
+      <label>当前水位（m）
+        <input type="number" id="waterInput" step="0.01" placeholder="如 2.35">
+      </label>
+      <label>安全线（m）
+        <input type="number" id="safetyInput" step="0.01">
+      </label>
+      <button id="btnWater" class="btn primary">登记水位</button>
+    </section>
+
+    <section class="panel panel-pumps">
+      <h2>泵组状态</h2>
+      <div id="pumpGrid" class="pump-grid"></div>
+    </section>
+
+    <section class="panel" id="handoverPanel">
+      <h2>交接班</h2>
+      <div id="handoverInfo" class="handover-info"></div>
+      <label>交接人
+        <input type="text" id="handoverName" placeholder="接班人姓名">
+      </label>
+      <button id="btnHandover" class="btn primary">确认交接</button>
+    </section>
+
+    <section class="panel" id="archivePanel">
+      <h2>本地存档</h2>
+      <p id="saveInfo" class="save-info">尚未保存</p>
+      <button id="btnExportCsv" class="btn">导出台账（CSV）</button>
+      <button id="btnExportJson" class="btn">导出备份（JSON）</button>
+      <button id="btnReset" class="btn danger">清空重来</button>
+    </section>
+
+    <section class="panel panel-log">
+      <h2>值守台账</h2>
+      <div class="log-wrap">
+        <table>
+          <thead>
+            <tr><th>时间</th><th>班次</th><th>类型</th><th>泵组</th><th>水位(m)</th><th>内容</th></tr>
+          </thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/pumpArchive.js"></script>
+  <script src="js/rotationRules.js"></script>
+  <script src="js/localStore.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

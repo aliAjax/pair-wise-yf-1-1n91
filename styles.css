@@ -1,0 +1,197 @@
+:root {
+  --bg: #f2f4f7;
+  --panel: #ffffff;
+  --ink: #1f2933;
+  --muted: #697586;
+  --line: #d8dee6;
+  --blue: #1d6fb8;
+  --green: #1e8e5a;
+  --amber: #b7791f;
+  --red: #c0392b;
+  --red-bg: #fdecea;
+  --amber-bg: #fdf6e3;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  background: #10324f;
+  color: #fff;
+}
+.topbar h1 { font-size: 18px; margin: 0; }
+.operator-box label { color: #cfe0ef; font-size: 13px; }
+.operator-box input {
+  margin-left: 8px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+.alerts { padding: 0 24px; }
+.alert {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.alert.warn { background: var(--amber-bg); border-color: var(--amber); color: var(--amber); }
+.alert.danger { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+.alert .blink { font-weight: 700; }
+.blink { animation: blink 1s steps(2, start) infinite; }
+@keyframes blink { to { visibility: hidden; } }
+
+.panel {
+  margin: 16px 24px;
+  padding: 16px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.panel h2 { margin: 0 0 12px; font-size: 15px; }
+
+form label { display: inline-flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+input[type="number"], input[type="text"] {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--ink);
+  min-width: 110px;
+}
+button {
+  padding: 7px 16px;
+  border: 1px solid var(--blue);
+  background: #fff;
+  color: var(--blue);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+button:hover { background: #eaf3fb; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button.primary { background: var(--blue); color: #fff; }
+button.primary:hover { background: #175a96; }
+button.danger { border-color: var(--red); color: var(--red); }
+button.danger:hover { background: var(--red-bg); }
+button.ghost-danger { border-color: var(--red); color: var(--red); }
+
+.water-form { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.safety-line input { min-width: 90px; }
+.water-status { font-weight: 600; padding: 6px 10px; border-radius: 4px; }
+.water-status.unsafe { background: var(--red-bg); color: var(--red); }
+.water-status.safe { background: #e7f6ee; color: var(--green); }
+.water-status.none { color: var(--muted); font-weight: 400; }
+
+.pumps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+.pump-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-left-width: 5px;
+}
+.pump-card.running { border-left-color: var(--green); background: #f4fbf7; }
+.pump-card.standby { border-left-color: var(--muted); }
+.pump-card.maintenance { border-left-color: var(--amber); background: var(--amber-bg); }
+.pump-card.overtime { border-left-color: var(--red); background: var(--red-bg); }
+
+.pump-head { display: flex; justify-content: space-between; align-items: center; }
+.pump-name { font-weight: 700; font-size: 15px; }
+.pump-state { font-size: 12px; padding: 2px 8px; border-radius: 10px; }
+.state-running { background: var(--green); color: #fff; }
+.state-standby { background: #e4e9f0; color: var(--muted); }
+.state-maintenance { background: var(--amber); color: #fff; }
+.state-overtime { background: var(--red); color: #fff; }
+
+.pump-metrics { font-size: 13px; color: var(--ink); }
+.pump-metrics .row { display: flex; justify-content: space-between; padding: 2px 0; }
+.pump-metrics .due { color: var(--amber); font-weight: 700; }
+.pump-metrics .over { color: var(--red); font-weight: 700; }
+
+.pump-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.pump-actions button { flex: 1; padding: 6px 8px; font-size: 13px; }
+
+.handover-form .handover-row { display: flex; gap: 16px; margin-bottom: 10px; }
+.handover-pumps { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+.handover-pumps label { min-width: 200px; }
+.hint { color: var(--muted); font-size: 12.5px; margin: 4px 0 10px; }
+
+.ledger-head { display: flex; justify-content: space-between; align-items: center; }
+.ledger-head select { padding: 5px 8px; border: 1px solid var(--line); border-radius: 4px; }
+.ledger { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ledger th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+.ledger tr.violation td { background: var(--red-bg); }
+.ledger tr.overtime td { background: var(--amber-bg); }
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: #e4e9f0;
+  color: #41505f;
+  white-space: nowrap;
+}
+.tag.bad { background: var(--red); color: #fff; }
+.tag.ot { background: var(--amber); color: #fff; }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 24px;
+  padding-top: 12px;
+  color: var(--muted);
+  font-size: 12.5px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.footer-actions { display: flex; gap: 8px; }
+.footer-actions button { padding: 5px 12px; font-size: 13px; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%) translateY(20px);
+  background: #22303d;
+  color: #fff;
+  padding: 9px 18px;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .2s ease;
+  font-size: 13px;
+  max-width: 80vw;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: var(--red); }
+
+@media (max-width: 560px) {
+  .topbar { flex-direction: column; align-items: flex-start; }
+  .panel { margin: 12px; }
+  .alerts { padding: 0 12px; }
+}
